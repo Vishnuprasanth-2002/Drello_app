@@ -43,7 +43,7 @@ function App() {
     <>
       <div className="container">
         <h1>My todo</h1>
-        <Card />
+        <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
       </div>
     </>
   );

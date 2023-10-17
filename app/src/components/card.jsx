@@ -1,24 +1,33 @@
 import React, { useState } from "react";
 
-function Card() {
-  const [blockquotes, setBlockquotes] = useState([]);
+function Card({ addTodo, todos }) {
+  const [blockquotes, setBlockquotes] = useState("");
 
   const addCard = () => {
-    const newBlockquotes = [
-      ...blockquotes,
-      <blockquote key={blockquotes.length} contentEditable={true}>
-        <p>Edit this content to add your own quote</p>
-      </blockquote>,
-    ];
-    setBlockquotes(newBlockquotes);
+    setBlockquotes("");
+    addTodo(blockquotes);
   };
+
+  function handleBlockquoteChange(newValue) {
+    setBlockquotes(newValue);
+    console.log(newValue);
+  }
 
   return (
     <>
       <button onClick={addCard}>+</button>
       <div className="card">
-        {blockquotes.map((blockquote, index) => (
-          <div key={index}>{blockquote}</div>
+        {todos.map((todo, index) => (
+          <div key={todo.id}>
+            <blockquote
+              key={todo.id}
+              contentEditable={true}
+              suppressContentEditableWarning={true}
+              onInput={(e) => handleBlockquoteChange(e.target.innerHTML)}
+            >
+              {todo.text}
+            </blockquote>
+          </div>
         ))}
       </div>
     </>

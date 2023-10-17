@@ -2,16 +2,16 @@ blockquote {
   margin: 0;
 }
 
-blockquote p {
+blockquote {
   padding: 15px;
   background: #eee;
   border-radius: 5px;
 }
 
-blockquote p::before {
+/* blockquote::before {
   content: "\201C";
 }
 
-blockquote p::after {
+blockquote::after {
   content: "\201D";
-}
+} */
