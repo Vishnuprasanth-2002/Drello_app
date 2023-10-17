@@ -8,10 +8,10 @@ blockquote {
   border-radius: 5px;
 }
 
-blockquote::before {
+/* blockquote::before {
   content: "\201C";
 }
 
 blockquote::after {
   content: "\201D";
-}
+} */
