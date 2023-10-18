@@ -1,5 +1,7 @@
 import { useReducer, useEffect } from "react";
 import Card from "./components/card";
+import In_progress from "./components/inprogress";
+import Done from "./components/done";
 import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
@@ -83,9 +85,11 @@ function App() {
       </div>
       <div className="progess">
         <h2>progress</h2>
+        <In_progress tasks={tasks} />
       </div>
       <div className="done">
         <h2>Done</h2>
+        <Done tasks={tasks} />
       </div>
     </div>
   );

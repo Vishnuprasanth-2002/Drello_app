@@ -39,6 +39,9 @@ function Card({ addTodo, handleTaskEdit, handleDelete, tasks }) {
   function handleDeletebtn(id) {
     handleDelete(id);
   }
+  function onDragStart(e, id) {
+    console.log(id);
+  }
 
   return (
     <>
@@ -49,7 +52,14 @@ function Card({ addTodo, handleTaskEdit, handleDelete, tasks }) {
         {tasks
           .filter((t) => t.inState === "todo")
           .map((task, id) => (
-            <div className="card" key={task.id} draggable>
+            <div
+              className="card"
+              key={task.id}
+              draggable
+              onDragStart={(e) => {
+                onDragStart(e, task.id);
+              }}
+            >
               <div className="delete">
                 <button onClick={() => handleDeletebtn(task.id)}>X</button>
               </div>

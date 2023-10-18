@@ -1,9 +1,23 @@
-function In_progress() {
+import React, { useState } from "react";
+
+function In_progress({ handleTaskEdit, handleDelete, tasks }) {
+  const [text, setText] = useState("");
+
+  function handletaskChange(newValue) {
+    setText(newValue);
+  }
+  function handleBlur(id) {
+    handleTaskEdit(text, id);
+  }
+  function handleDeletebtn(id) {
+    handleDelete(id);
+  }
+
   return (
     <>
       <div className="card-div">
         {tasks
-          .filter((t) => t.inState === "In_progress")
+          .filter((t) => t.inState === "in_progress")
           .map((task, id) => (
             <div className="card" key={task.id} draggable>
               <div className="delete">
