@@ -1,24 +1,49 @@
-import { useEffect, useReducer } from "react";
+import { useReducer, useEffect } from "react";
 import Card from "./components/card";
+import { v4 as uuidv4 } from "uuid";
 import "./App.css";
 
 function App() {
-  const [todos, dispatch] = useReducer(todoReducer, []);
+  const [tasks, dispatch] = useReducer(todoReducer, getFromLocalStorage());
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
 
-  function todoReducer(todos, action) {
+  function getFromLocalStorage() {
+    const storedValues = localStorage.getItem("tasks");
+    if (storedValues) {
+      return JSON.parse(storedValues);
+    } else {
+      return [];
+    }
+  }
+
+  function todoReducer(tasks, action) {
     switch (action.type) {
-      case "TODO_ADD": {
+      case "TASK_ADD": {
         return [
-          ...todos,
+          ...tasks,
           {
-            id: new Date().getTime(),
-            text: action.value,
+            id: uuidv4(),
+            text: "",
+            dateTime: new Date(),
+            inState: "todo",
           },
         ];
       }
-      case "TODO_DELETE": {
-        const filtered = todos.filter((t) => t.id != action.value);
-        return [...filtered];
+      case "TASK_DELETE": {
+        console.log(action.value);
+        const filtered = tasks.filter((t) => t.id !== action.value);
+        return filtered;
+      }
+      case "TASK_EDITED": {
+        const editedTask = [...tasks];
+        const idx = editedTask.findIndex((nt) => nt.id === action.value.id);
+        if (idx !== -1) {
+          (editedTask[idx]["dateTime"] = new Date()),
+            (editedTask[idx]["text"] = action.value.value);
+        }
+        return editedTask;
       }
       default: {
         throw Error("Unknown action: " + action.type);
@@ -28,24 +53,41 @@ function App() {
 
   function handleAdd(value) {
     dispatch({
-      type: "TODO_ADD",
+      type: "TASK_ADD",
       value: value,
     });
   }
   function handleDelete(id) {
     dispatch({
-      type: "TODO_DELETE",
+      type: "TASK_DELETE",
       value: id,
+    });
+  }
+  function handleEdited(value, id) {
+    dispatch({
+      type: "TASK_EDITED",
+      value: { value, id },
     });
   }
 
   return (
-    <>
+    <div className="total-div">
       <div className="container">
-        <h1>My todo</h1>
-        <Card addTodo={(blockquotes) => handleAdd(blockquotes)} todos={todos} />
+        <h2>My todo</h2>
+        <Card
+          addTodo={handleAdd}
+          tasks={tasks}
+          handleTaskEdit={handleEdited}
+          handleDelete={(id) => handleDelete(id)}
+        />
       </div>
-    </>
+      <div className="progess">
+        <h2>progress</h2>
+      </div>
+      <div className="done">
+        <h2>Done</h2>
+      </div>
+    </div>
   );
 }
 

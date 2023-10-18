@@ -1,17 +1,61 @@
-blockquote {
+textarea {
   margin: 0;
 }
 
-blockquote {
+textarea {
+  resize: none;
+  width: 90%;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  margin-bottom: 5px;
   padding: 15px;
   background: #eee;
   border-radius: 5px;
 }
-
-/* blockquote::before {
-  content: "\201C";
+.total-div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  background-color: rgba(2, 140, 246, 0.74);
+}
+.container,
+.progess,
+.done {
+  border: 1px solid rgb(35, 12, 149);
+  height: 100vh;
 }
 
-blockquote::after {
-  content: "\201D";
-} */
+.card {
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 15px;
+  background-color: skyblue;
+  box-shadow: 3px 3px 5px rgb(3, 26, 29);
+}
+
+.date-time {
+  font-size: 14px;
+  color: black;
+}
+.delete {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+  margin: 5px;
+}
+.delete button {
+  background-color: red;
+}
+.add {
+  display: flex;
+  justify-content: end;
+  margin: 30px;
+}
+.add button {
+  padding: 5px 10px;
+  font-size: 20px;
+}
