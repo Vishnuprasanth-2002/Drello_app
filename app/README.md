@@ -1,5 +1,9 @@
 # creating drello app
 
+### method
+
+    using reducers
+
 ### with dragable
 
     draging side
@@ -8,4 +12,4 @@
     onStart
     onOver
     OnDrop
-    
+
