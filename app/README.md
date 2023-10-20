@@ -3,6 +3,7 @@
 ### method
 
     using reducers
+    reducers will handle by dispatch
 
 ### with dragable
 
