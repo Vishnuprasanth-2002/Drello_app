@@ -2,5 +2,4 @@
 
 ### with dragable
 
-    draging side
-    draging div to div
+    
