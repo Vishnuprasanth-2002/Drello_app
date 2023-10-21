@@ -53,7 +53,7 @@ textarea {
 .add {
   display: flex;
   justify-content: end;
-  margin: 30px;
+  margin: 32px;
 }
 .add button {
   padding: 5px 10px;
